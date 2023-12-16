@@ -1,7 +1,15 @@
 server.port: 8081
+
+resilience4j.ratelimiter:
+  instances:
+    cryptoRateLimiter:
+      limitForPeriod: 2
+      limitRefreshPeriod: 10s
+      timeoutDuration: 1s
+
 spring:
   datasource:
-    url: ${DB_URL:jdbc:mysql://localhost:3306/crypto?reconnect=true&useUnicode=true&characterEncoding=UTF-8&prepStmtCacheSize=500&prepStmtCacheSqlLimit=2048&cachePrepStmts=true&sendFractionalSeconds=false}
+    url: ${DB_URL:jdbc:mysql://localhost:3306/crypto?reconnect=true&useUnicode=true&characterEncoding=UTF-8}
     username: ${DB_USERNAME:root}
     password: ${DB_PASSWORD:root}
     driver-class-name: ${DB_DRIVER:com.mysql.cj.jdbc.Driver}

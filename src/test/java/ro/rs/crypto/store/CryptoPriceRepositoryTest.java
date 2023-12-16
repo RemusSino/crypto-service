@@ -36,6 +36,12 @@ public class CryptoPriceRepositoryTest {
         assertThat(cryptoPrices).hasSize(2);
     }
 
+    @Test
+    void testFindSupportedSymbols() {
+        cryptoPriceRepository.saveAll(createBTCPrices());
+        assertThat(cryptoPriceRepository.findSupportedSymbols()).containsExactly("BTC");
+    }
+
     public static List<CryptoPrice> createBTCPrices() {
         return Streams.of("1641009600000,BTC,46813.21",
                         "1641020400000,BTC,46979.61",

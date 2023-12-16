@@ -16,6 +16,7 @@ import java.util.Objects;
 @Setter
 @EqualsAndHashCode
 @Entity
+@Table(name = "crypto_price")
 public final class CryptoPrice {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
