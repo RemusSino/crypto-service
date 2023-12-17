@@ -1,0 +1,23 @@
+version: '3'
+services:
+  crypto-db:
+    image: mysql:8.0
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: crypto
+      MYSQL_USER: crypto
+      MYSQL_PASSWORD: crypto
+    ports:
+      - "3306:3306"
+  crypto-service:
+    depends_on:
+      - crypto-db
+    build: .
+    ports:
+      - 8081:8081
+    environment:
+      DB_URL: "jdbc:mysql://crypto-db:3306/crypto?reconnect=true&useUnicode=true&characterEncoding=UTF-8&prepStmtCacheSize=500&prepStmtCacheSqlLimit=2048&cachePrepStmts=true&sendFractionalSeconds=false"
+    stdin_open: true
+    tty: true

@@ -50,7 +50,7 @@ public class CryptoPriceController {
             @ApiResponse(responseCode = "200", description = "OK",
                     content = {@Content(mediaType = APPLICATION_JSON_VALUE,
                             schema = @Schema(implementation = Stats.class))}),
-            @ApiResponse(responseCode = "400", description = "Bad request in case of wrong format of the day parameter")})
+            @ApiResponse(responseCode = "404", description = "Bad request in case of unsupported symbol")})
     @RateLimiter(name = "cryptoRateLimiter")
     @RequestMapping(method = RequestMethod.GET, value = "/api/v1/cryptos/{symbol}/stats", produces = APPLICATION_JSON_VALUE)
     public ResponseEntity<Stats> getCryptoStatsBySymbol(@PathVariable("symbol") final String symbol) {
